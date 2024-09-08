@@ -76,7 +76,7 @@ export default function Home() {
 			headerClassName: "super-app-theme--header",
 		},
 		{
-			field: "start_timestamp",
+			field: "startDateFormatted",
 			headerName: "Date Created",
 			width: 180,
 			headerClassName: "super-app-theme--header",

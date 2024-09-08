@@ -1,5 +1,6 @@
 import { Chip } from "@mui/material";
 import { useEffect, useState } from "react";
+import { formatDate } from "../../utils/formateDate";
 export interface Survey {
     survey_id: string;
     survey_instance_id: string;
@@ -35,11 +36,12 @@ const mockData: Survey[] = [
 ];
 
 const mapSurvey = (data: Survey[]) => {
-    return data.map((data, index) => {
+    return data.map((data) => {
         return {
             ...data,
             id: data.survey_id,
-            status: 'success'
+            status: 'success',
+            startDateFormatted: formatDate(new Date(data.start_timestamp))
         }
     })
 }
