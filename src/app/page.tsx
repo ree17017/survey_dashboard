@@ -105,7 +105,7 @@ export default function Home() {
 					</Button>
 					<Button
 						variant="contained"
-						sx={{ marginTop: "16px", marginLeft: "8px" }}
+						sx={{ marginTop: "16px", marginLeft: "16px" }}
 					>
 						<AddOutlined /> NEW SURVEY
 					</Button>
