@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Survey } from "./useGetSurvey";
+import { Survey } from "./useSurveyData";
 
 interface TableProps {
 	columns: GridColDef[];
@@ -26,6 +26,8 @@ export function SurveyTable({ columns, rows, loading, error }: TableProps) {
 				rows={rows}
 				loading={loading}
 				rowHeight={100}
+				initialState={{ pagination: { paginationModel: { pageSize: 5 } } }}
+				pageSizeOptions={[5, 10, 25]}
 			/>
 		</Box>
 	);

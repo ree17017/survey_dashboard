@@ -16,7 +16,8 @@ import {
 } from "@mui/icons-material";
 import { SurveyTable } from "../../modules/survey_library/SurveyTable";
 import { GridColDef } from "@mui/x-data-grid";
-import { useSurveyData } from "../../modules/survey_library/useGetSurvey";
+import { useSurveyData } from "../../modules/survey_library/useSurveyData";
+import { CopyHyperLink } from "../../components/CopyHyperLink";
 
 type StatusKey = "success" | "disabled" | "pending" | "deleted";
 
@@ -83,6 +84,9 @@ export default function Home() {
 			headerName: "Hyperlink",
 			width: 357,
 			headerClassName: "super-app-theme--header",
+			renderCell: (params) => (
+				<CopyHyperLink hyperlink={params.row.survey_url} />
+			),
 		},
 	];
 
