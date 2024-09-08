@@ -113,11 +113,11 @@ export default function Home() {
 			</Box>
 			<Divider variant="fullWidth" sx={{ marginTop: "16px" }} />
 			<Box ml="32px" mr="32px">
-				<Grid2 mt="14px" mb="14px">
+				<Grid2 mt="24px" mb="24px">
 					<TextField
 						placeholder="Search through your surveys..."
 						variant="outlined"
-						sx={{ width: "300px" }}
+						sx={{ width: "550px" }}
 						InputProps={{
 							startAdornment: (
 								<InputAdornment position="start">

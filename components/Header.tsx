@@ -9,8 +9,10 @@ export function Header({
 }) {
 	return (
 		<Grid2>
-			<Typography variant="h5">{title}</Typography>
-			<Typography variant="body2">{description}</Typography>
+			<Typography variant="h6" mb="6px">
+				{title}
+			</Typography>
+			<Typography variant="subtitle2">{description}</Typography>
 		</Grid2>
 	);
 }
