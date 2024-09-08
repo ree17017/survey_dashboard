@@ -5,7 +5,8 @@ import {
 	Chip,
 	Divider,
 	Grid2,
-	Typography,
+	InputAdornment,
+	TextField,
 	lighten,
 } from "@mui/material";
 import { Header } from "../../components/Header";
@@ -18,6 +19,7 @@ import { SurveyTable } from "../../modules/survey_library/SurveyTable";
 import { GridColDef } from "@mui/x-data-grid";
 import { useSurveyData } from "../../modules/survey_library/useSurveyData";
 import { CopyHyperLink } from "../../components/CopyHyperLink";
+import SearchIcon from "@mui/icons-material/Search";
 
 type StatusKey = "success" | "disabled" | "pending" | "deleted";
 
@@ -111,9 +113,20 @@ export default function Home() {
 			</Box>
 			<Divider variant="fullWidth" sx={{ marginTop: "16px" }} />
 			<Box ml="32px" mr="32px">
-				<Typography sx={{ margin: "16px 0 16px 0" }}>
-					Search and date
-				</Typography>
+				<Grid2 mt="14px" mb="14px">
+					<TextField
+						placeholder="Search through your surveys..."
+						variant="outlined"
+						sx={{ width: "300px" }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<SearchIcon />
+								</InputAdornment>
+							),
+						}}
+					/>
+				</Grid2>
 				<Grid2 sx={{ borderRadius: "16px", maxWidth: "900px" }}>
 					{rows && (
 						<SurveyTable

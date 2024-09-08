@@ -28,6 +28,8 @@ export function CopyHyperLink({ hyperlink }: { hyperlink: string }) {
 			<TextField
 				variant="outlined"
 				aria-readonly
+				fullWidth
+				value={link}
 				InputProps={{
 					endAdornment: (
 						<InputAdornment position="start" onClick={copyToClipboard}>
