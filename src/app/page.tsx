@@ -1,95 +1,126 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import {
+	Box,
+	Button,
+	Chip,
+	Divider,
+	Grid2,
+	Typography,
+	lighten,
+} from "@mui/material";
+import { Header } from "../../components/Header";
+import {
+	AddOutlined,
+	FiberManualRecord,
+	FileDownloadOutlined,
+} from "@mui/icons-material";
+import { SurveyTable } from "../../modules/survey_library/SurveyTable";
+import { GridColDef } from "@mui/x-data-grid";
+import { useSurveyData } from "../../modules/survey_library/useGetSurvey";
+
+type StatusKey = "success" | "disabled" | "pending" | "deleted";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+	const { rows, loading, error } = useSurveyData();
+	const labels: Record<StatusKey, string> = {
+		success: "Active",
+		disabled: "Disabled",
+		pending: "Pending",
+		deleted: "Deleted",
+	};
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	const statusColor: Record<StatusKey, "success" | "error" | "warning"> = {
+		success: "success",
+		disabled: "success",
+		pending: "success",
+		deleted: "success",
+	};
+
+	const chipColors: Record<StatusKey, string> = {
+		success: "#4caf50", // Green for success
+		disabled: "#9e9e9e", // Gray for disabled
+		pending: "#ff9800", // Orange for pending
+		deleted: "#f44336", // Red for deleted
+	};
+
+	const StatusLabel: React.FC<{ status: StatusKey }> = ({ status }) => {
+		const label = labels[status] || "Unknown";
+		const color = statusColor[status] || "Unknown";
+		const lighterColor = lighten(chipColors[status] || "#ccc", 0.9);
+
+		return (
+			<Chip
+				sx={{ background: lighterColor }}
+				label={label}
+				icon={<FiberManualRecord fontSize="small" color={color} />}
+			/>
+		);
+	};
+	const columns: GridColDef[] = [
+		{
+			field: "status",
+			headerName: "Status",
+			width: 180,
+			renderCell: (params) => (
+				<StatusLabel status={params.row.status as StatusKey} />
+			),
+			headerClassName: "super-app-theme--header",
+		},
+		{
+			field: "title",
+			headerName: "Title",
+			width: 180,
+			headerClassName: "super-app-theme--header",
+		},
+		{
+			field: "start_timestamp",
+			headerName: "Date Created",
+			width: 180,
+			headerClassName: "super-app-theme--header",
+		},
+		{
+			field: "survey_url",
+			headerName: "Hyperlink",
+			width: 357,
+			headerClassName: "super-app-theme--header",
+		},
+	];
+
+	return (
+		<>
+			<Box mt="120px" ml="32px" mr="32px">
+				<Grid2>
+					<Header
+						title="Survey Dashboard"
+						description="All your survey activity displayed in one convenient place."
+					/>
+					<Button variant="outlined" sx={{ marginTop: "16px" }}>
+						<FileDownloadOutlined /> EXPORT
+					</Button>
+					<Button
+						variant="contained"
+						sx={{ marginTop: "16px", marginLeft: "8px" }}
+					>
+						<AddOutlined /> NEW SURVEY
+					</Button>
+				</Grid2>
+			</Box>
+			<Divider variant="fullWidth" sx={{ marginTop: "16px" }} />
+			<Box ml="32px" mr="32px">
+				<Typography sx={{ margin: "16px 0 16px 0" }}>
+					Search and date
+				</Typography>
+				<Grid2 sx={{ borderRadius: "16px", maxWidth: "900px" }}>
+					{rows && (
+						<SurveyTable
+							columns={columns}
+							rows={rows}
+							loading={loading}
+							error={error}
+						/>
+					)}
+				</Grid2>
+			</Box>
+		</>
+	);
 }
