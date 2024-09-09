@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 
 export function CopyHyperLink({ hyperlink }: { hyperlink: string }) {
-	const [link, setLink] = useState(hyperlink);
+	const [link] = useState(hyperlink);
 
 	const copyToClipboard = () => {
 		navigator.clipboard.writeText(link);
