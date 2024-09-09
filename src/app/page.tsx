@@ -8,14 +8,11 @@ import {
 	TextField,
 } from "@mui/material";
 import { Header } from "../../components/Header";
-import {
-	AddOutlined,
-	FileDownloadOutlined,
-} from "@mui/icons-material";
+import { AddOutlined, FileDownloadOutlined } from "@mui/icons-material";
 import { SurveyTable } from "../../modules/survey_library/SurveyTable";
 import { useSurveyData } from "../../modules/survey_library/useSurveyData";
 import SearchIcon from "@mui/icons-material/Search";
-import { columns } from "../../mockdata/SurveyTableUtil";
+import { columns } from "../../modules/survey_library/SurveyTableUtil";
 
 export type StatusKey = "success" | "disabled" | "pending" | "deleted";
 

@@ -1,8 +1,8 @@
 import { FiberManualRecord } from "@mui/icons-material";
 import { lighten, Chip } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
-import { StatusKey } from "../src/app/page";
-import { CopyHyperLink } from "../components/CopyHyperLink";
+import { StatusKey } from "../../src/app/page";
+import { CopyHyperLink } from "../../components/CopyHyperLink";
 
 export const labels: Record<StatusKey, string> = {
 	success: "Active",
