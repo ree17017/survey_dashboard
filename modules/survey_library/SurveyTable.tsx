@@ -4,7 +4,7 @@ import { Survey } from "./useSurveyData";
 
 interface TableProps {
 	columns: GridColDef[];
-	rows: Survey[];
+	rows?: Survey[];
 	loading: boolean;
 	error: Error | null;
 }
@@ -26,7 +26,7 @@ const SurveyLayout = ({ children }: { children: React.ReactElement }) => {
 };
 
 export function SurveyTable({ columns, rows, loading, error }: TableProps) {
-	if (error) {
+	if (error || (!rows && !loading)) {
 		return (
 			<SurveyLayout>
 				<>Error</>
@@ -56,8 +56,8 @@ export function SurveyTable({ columns, rows, loading, error }: TableProps) {
 				pageSizeOptions={[5, 10, 25]}
 				slotProps={{
 					loadingOverlay: {
-						variant: "skeleton",
-						noRowsVariant: "skeleton",
+						variant: "circular-progress",
+						noRowsVariant: "circular-progress",
 					},
 				}}
 			/>

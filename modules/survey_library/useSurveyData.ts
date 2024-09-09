@@ -24,7 +24,7 @@ const mapSurvey = (data: Survey[]) => {
 }
 
 export function useSurveyData() {
-    const [rows, setRows] = useState<Survey[] | null>(null);
+    const [rows, setRows] = useState<Survey[] | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | null>(null);
 

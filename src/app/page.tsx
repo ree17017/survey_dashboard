@@ -55,14 +55,12 @@ export default function Home() {
 					/>
 				</Grid2>
 				<Grid2 sx={{ borderRadius: "16px", maxWidth: "900px" }}>
-					{rows && (
 						<SurveyTable
 							columns={columns}
 							rows={rows}
 							loading={loading}
 							error={error}
 						/>
-					)}
 				</Grid2>
 			</Box>
 		</>
