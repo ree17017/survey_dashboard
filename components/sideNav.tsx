@@ -20,6 +20,7 @@ import {
 	Support,
 } from "@mui/icons-material";
 import MenuList from "./MenuItems";
+import ClassRankedIcon from "../modules/survey_library/ClassRanked";
 
 const drawerWidth = 350;
 export type SideNav = {
@@ -27,12 +28,14 @@ export type SideNav = {
 };
 export default function SideNav() {
 	const menuList = [
+		{ text: "Menu" },
 		{ text: "Homepage", icon: <DashboardOutlined /> },
 		{ text: "Course Analytics", icon: <InsertChartOutlined /> },
 		{ text: "Survey Library", icon: <LibraryBooksOutlined /> },
 		{ text: "My Tasks", icon: <CheckCircleOutline /> },
 	];
 	const generalList = [
+		{ text: "General" },
 		{ text: "Settings", icon: <Settings /> },
 		{ text: "Support", icon: <Support /> },
 		{ text: "Account", icon: <AccountCircleIcon /> },
@@ -69,10 +72,11 @@ export default function SideNav() {
 				variant="permanent"
 				anchor="left"
 			>
+				<ClassRankedIcon />
 				<TextField
 					placeholder="Search..."
 					variant="outlined"
-					sx={{ width: "300px" }}
+					sx={{ width: "300px", marginTop: "16px" }}
 					InputProps={{
 						startAdornment: (
 							<InputAdornment position="start">
@@ -81,14 +85,8 @@ export default function SideNav() {
 						),
 					}}
 				/>
-				<Typography ml="8px" mt="16px">
-					Menu
-				</Typography>
 				<MenuList items={menuList} />
 				<Divider />
-				<Typography ml="8px" mt="16px">
-					General
-				</Typography>
 				<MenuList items={generalList} />
 			</Drawer>
 		</Box>
