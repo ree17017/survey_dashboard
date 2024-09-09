@@ -29,17 +29,29 @@ export function useSurveyData() {
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        setTimeout(() => {
+        const fetchSurveyData = async () => {
+            setLoading(true);
             try {
-                // Mock Fetch survey data from API.
-                setRows(mapSurvey(mockSurveyData));
+                let response;
+                if (process.env.NODE_ENV === 'development') {
+                    response = mockSurveyData;
+                } else {
+                    const res = await fetch('https://classRanked.com/api/instance/');
+                    response = await res.json();
+                }
+
+                setRows(mapSurvey(response));
             } catch (error) {
                 setError(error as Error);
             } finally {
                 setLoading(false);
             }
-        }, 1000)
-    }, [])
+        };
+
+        setTimeout(() => {
+            fetchSurveyData();
+        }, 1000);
+    }, []);
 
     return { rows, loading, error }
 }

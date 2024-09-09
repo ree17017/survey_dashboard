@@ -9,7 +9,7 @@ interface TableProps {
 	error: Error | null;
 }
 
-export function SurveyTable({ columns, rows, loading }: TableProps) {
+const SurveyLayout = ({ children }: { children: React.ReactElement }) => {
 	return (
 		<Box
 			borderTop="1px solid #EBEBEB"
@@ -20,6 +20,22 @@ export function SurveyTable({ columns, rows, loading }: TableProps) {
 			<Typography m="16px 0 16px 24px" fontWeight={550}>
 				Your Surveys
 			</Typography>
+			{children}
+		</Box>
+	);
+};
+
+export function SurveyTable({ columns, rows, loading, error }: TableProps) {
+	if (error) {
+		return (
+			<SurveyLayout>
+				<>Error</>
+			</SurveyLayout>
+		);
+	}
+
+	return (
+		<SurveyLayout>
 			<DataGrid
 				sx={{
 					borderRadius: 0,
@@ -45,6 +61,6 @@ export function SurveyTable({ columns, rows, loading }: TableProps) {
 					},
 				}}
 			/>
-		</Box>
+		</SurveyLayout>
 	);
 }
