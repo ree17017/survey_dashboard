@@ -3,10 +3,6 @@ import {
 	Divider,
 	Drawer,
 	InputAdornment,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemText,
 	TextField,
 	Toolbar,
 	Typography,
@@ -23,6 +19,7 @@ import {
 	Settings,
 	Support,
 } from "@mui/icons-material";
+import MenuList from "./MenuItems";
 
 const drawerWidth = 350;
 export type SideNav = {
@@ -41,6 +38,7 @@ export default function SideNav() {
 		{ text: "Account", icon: <AccountCircleIcon /> },
 		{ text: "Logout", icon: <Logout /> },
 	];
+
 	return (
 		<Box sx={{ display: "flex" }}>
 			<AppBar
@@ -86,30 +84,12 @@ export default function SideNav() {
 				<Typography ml="8px" mt="16px">
 					Menu
 				</Typography>
-				<List>
-					{menuList.map(({ text, icon }) => (
-						<ListItem key={text} disablePadding>
-							<ListItemButton>
-								{icon && icon}{" "}
-								<ListItemText sx={{ marginLeft: "8px" }} primary={text} />
-							</ListItemButton>
-						</ListItem>
-					))}
-				</List>
+				<MenuList items={menuList} />
 				<Divider />
 				<Typography ml="8px" mt="16px">
 					General
 				</Typography>
-				<List>
-					{generalList.map(({ text, icon }) => (
-						<ListItem key={text} disablePadding>
-							<ListItemButton>
-								{icon && icon}
-								<ListItemText sx={{ marginLeft: "8px" }} primary={text} />
-							</ListItemButton>
-						</ListItem>
-					))}
-				</List>
+				<MenuList items={generalList} />
 			</Drawer>
 		</Box>
 	);

@@ -2,95 +2,25 @@
 import {
 	Box,
 	Button,
-	Chip,
 	Divider,
 	Grid2,
 	InputAdornment,
 	TextField,
-	lighten,
 } from "@mui/material";
 import { Header } from "../../components/Header";
 import {
 	AddOutlined,
-	FiberManualRecord,
 	FileDownloadOutlined,
 } from "@mui/icons-material";
 import { SurveyTable } from "../../modules/survey_library/SurveyTable";
-import { GridColDef } from "@mui/x-data-grid";
 import { useSurveyData } from "../../modules/survey_library/useSurveyData";
-import { CopyHyperLink } from "../../components/CopyHyperLink";
 import SearchIcon from "@mui/icons-material/Search";
+import { columns } from "../../mockdata/SurveyTableUtil";
 
-type StatusKey = "success" | "disabled" | "pending" | "deleted";
+export type StatusKey = "success" | "disabled" | "pending" | "deleted";
 
 export default function Home() {
 	const { rows, loading, error } = useSurveyData();
-	const labels: Record<StatusKey, string> = {
-		success: "Active",
-		disabled: "Disabled",
-		pending: "Pending",
-		deleted: "Deleted",
-	};
-
-	const statusColor: Record<StatusKey, "success" | "error" | "warning"> = {
-		success: "success",
-		disabled: "success",
-		pending: "success",
-		deleted: "success",
-	};
-
-	const chipColors: Record<StatusKey, string> = {
-		success: "#4caf50", // Green for success
-		disabled: "#9e9e9e", // Gray for disabled
-		pending: "#ff9800", // Orange for pending
-		deleted: "#f44336", // Red for deleted
-	};
-
-	const StatusLabel: React.FC<{ status: StatusKey }> = ({ status }) => {
-		const label = labels[status] || "Unknown";
-		const color = statusColor[status] || "Unknown";
-		const lighterColor = lighten(chipColors[status] || "#ccc", 0.9);
-
-		return (
-			<Chip
-				sx={{ background: lighterColor }}
-				label={label}
-				icon={<FiberManualRecord fontSize="small" color={color} />}
-			/>
-		);
-	};
-	const columns: GridColDef[] = [
-		{
-			field: "status",
-			headerName: "Status",
-			width: 180,
-			renderCell: (params) => (
-				<StatusLabel status={params.row.status as StatusKey} />
-			),
-			headerClassName: "super-app-theme--header",
-		},
-		{
-			field: "title",
-			headerName: "Title",
-			width: 180,
-			headerClassName: "super-app-theme--header",
-		},
-		{
-			field: "startDateFormatted",
-			headerName: "Date Created",
-			width: 180,
-			headerClassName: "super-app-theme--header",
-		},
-		{
-			field: "survey_url",
-			headerName: "Hyperlink",
-			width: 357,
-			headerClassName: "super-app-theme--header",
-			renderCell: (params) => (
-				<CopyHyperLink hyperlink={params.row.survey_url} />
-			),
-		},
-	];
 
 	return (
 		<>

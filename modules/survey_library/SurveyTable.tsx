@@ -17,7 +17,9 @@ export function SurveyTable({ columns, rows, loading }: TableProps) {
 			borderLeft="1px solid #EBEBEB"
 			borderRight="1px solid #EBEBEB"
 		>
-			<Typography m="16px 0 16px 16px">Your Surveys</Typography>
+			<Typography m="16px 0 16px 24px" fontWeight={550}>
+				Your Surveys
+			</Typography>
 			<DataGrid
 				sx={{
 					borderRadius: 0,
